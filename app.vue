@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full px-2 py-16 sm:px-0 bg-blue-500 space-y-20">
-    <TabGroup :default-index="1" class="max-w-md">
+  <div class="p-5">
+    <!-- <TabGroup :default-index="1" class="max-w-md">
       <TabList class="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
         <Tab
           :tabId="idx"
@@ -73,17 +73,41 @@
         <TabPanel :panelId="0">Come back home panel</TabPanel>
         <TabPanel :panelId="1">Come back homme</TabPanel>
       </TabPanels>
-    </TabGroup>
+    </TabGroup> -->
+
+    <!-- <FlowBox as="main" horizontal :vertical="true" class="bg-yellow-500 w-full h-1/2">
+      <p class="mt-16 w-20 whitespace-nowrap">This is it</p>
+      <p class="mt-16 w-20 whitespace-nowrap">This is it</p>
+      <p class="mt-16 w-20 whitespace-nowrap">This is it</p>
+      <p class="mt-16 w-20 whitespace-nowrap">This is it</p>
+      <p class="my-44">This is it</p>
+      <p class="my-44">This is it</p>
+      <p class="my-44">This is it</p>
+      <p class="my-44">This is it</p>
+      <p class="my-44">This is it</p>
+      <p class="my-44">This is it</p>
+      <Button />
+    </FlowBox>
+    <div class="h-screen bg-red-400 w-full">Content</div> -->
+    <!-- <Combobox>jjjdfadf</Combobox> -->
+    <Popover class="relative">
+      <PopoverButton v-slot="{menuIsVisible}" class="bg-red-600 text-white w-fit p-2 rounded-sm">click me {{ menuIsVisible }}</PopoverButton>
+      <PopoverPanel class="absolute left-0 z-10 mt-2 bg-gray-200 shadow rounded p-3 top-full max-w-sm lg:max-w-3xl">
+      <div>Panel here</div>
+      </PopoverPanel>
+    </Popover>
   </div>
-  
 </template>
 
 <script setup>
-import { Tab } from "./components/Tab.ts";
-import { TabGroup } from "./components/TabGroup.ts";
-import { TabList } from "./components/TabList.ts";
-import { TabPanel } from "./components/TabPanel";
-import { TabPanels } from "./components/TabPanels.ts";
+import { Popover, PopoverButton, PopoverPanel } from "./components/popover.ts";
+import { Combobox } from "./components/Combobox";
+import { FlowBox } from "./components/FlowBox";
+// import { Tab } from "./components/Tab.ts";
+// import { TabGroup } from "./components/TabGroup.ts";
+// import { TabList } from "./components/TabList.ts";
+// import { TabPanel } from "./components/TabPanel";
+// import { TabPanels } from "./components/TabPanels.ts";
 
 const categories = ref({
   Recent: [
