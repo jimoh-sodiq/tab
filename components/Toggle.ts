@@ -34,7 +34,7 @@ export const Toggle = defineComponent({
       return
     };
 
-    // expose(toggleComponentRef.value)
+    // expose({toggleComponentRef})
 
     return () =>
       h(
