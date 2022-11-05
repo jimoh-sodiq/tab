@@ -4,13 +4,6 @@ import { Fragment } from "vue";
 export const Toggle = defineComponent({
   name: "Toggle",
   props: {
-    as: {
-      type: String,
-      default: "button",
-    },
-    name: {
-      type: String,
-    },
     modelValue: {
       type: Boolean,
       required: true,
