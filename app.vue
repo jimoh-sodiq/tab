@@ -90,25 +90,62 @@
     </FlowBox>
     <div class="h-screen bg-red-400 w-full">Content</div> -->
     <!-- <Combobox>jjjdfadf</Combobox> -->
-    <Popover class="relative">
+    <!-- <Popover class="relative">
       <PopoverButton v-slot="{menuIsVisible}" class="bg-red-600 text-white w-fit p-2 rounded-sm">click me {{ menuIsVisible }}</PopoverButton>
       <PopoverPanel class="absolute left-0 z-10 mt-2 bg-gray-200 shadow rounded p-3 top-full max-w-sm lg:max-w-3xl">
       <div>Panel here</div>
       </PopoverPanel>
-    </Popover>
+    </Popover> -->
+    <!-- <Toggle /> -->
+    <!-- <label
+      @keydown.enter="switcher"
+      tabindex="0"
+      :class="check ? 'bg-teal-900' : 'bg-teal-700'"
+      class="relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+    >
+      <span class="sr-only">Use setting</span>
+      <span
+        aria-hidden="true"
+        :class="check ? 'translate-x-9' : 'translate-x-0'"
+        class="pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
+      />
+
+      <input type="checkbox" v-model="check" hidden />
+    </label> -->
+    <!-- {{ check }} -->
+    <Toggle
+      v-model="enabled"
+      :class="enabled ? 'bg-teal-900' : 'bg-teal-700'"
+      class="relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+    >
+      <span class="sr-only">Use setting</span>
+      <span
+        aria-hidden="true"
+        :class="enabled ? 'translate-x-9' : 'translate-x-0'"
+        class="pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
+      />
+    </Toggle>
+
+    {{ enabled }}
   </div>
 </template>
 
 <script setup>
-import { Popover, PopoverButton, PopoverPanel } from "./components/popover.ts";
-import { Combobox } from "./components/Combobox";
-import { FlowBox } from "./components/FlowBox";
+// import { Popover, PopoverButton, PopoverPanel } from "./components/popover.ts";
+// import { Combobox } from "./components/Combobox";
+// import { FlowBox } from "./components/FlowBox";
 // import { Tab } from "./components/Tab.ts";
+import { Toggle } from "./components/Toggle.ts";
 // import { TabGroup } from "./components/TabGroup.ts";
 // import { TabList } from "./components/TabList.ts";
 // import { TabPanel } from "./components/TabPanel";
 // import { TabPanels } from "./components/TabPanels.ts";
+const check = ref(false)
 
+const switcher =() => {
+  check.value = !check.value
+}
+const enabled = ref(true)
 const categories = ref({
   Recent: [
     {
