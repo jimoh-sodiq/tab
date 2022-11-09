@@ -114,6 +114,7 @@
     </label> -->
     <!-- {{ check }} -->
     <Toggle
+      v-slot="{ handleClick }"
       v-model="enabled"
       :class="enabled ? 'bg-teal-900' : 'bg-teal-700'"
       class="relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
@@ -124,9 +125,28 @@
         :class="enabled ? 'translate-x-9' : 'translate-x-0'"
         class="pointer-events-none inline-block h-[34px] w-[34px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"
       />
+      <div @click="handleClick">Eat Food</div>
     </Toggle>
 
     {{ enabled }}
+
+    <div
+      class="flex items-center gap-x-5 border w-[80vw] mx-auto p-3 overflow-x-auto snap-x relative"
+    >
+      <div
+        id="observerRoot"
+        ref="observerRoot"
+        class="w-48 h-48 shrink-0 border border-red-400 fixed left-1/2 translate-x-[-50%]"
+      />
+      <div
+        ref="targetBoxes"
+        class="grid place-items-center text-xl font-medium text-white bg-green-500 h-40 w-40 shrink-0 snap-center"
+        v-for="(box, index) in 30"
+        :key="index"
+      >
+        box {{ box }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -140,12 +160,35 @@ import { Toggle } from "./components/Toggle.ts";
 // import { TabList } from "./components/TabList.ts";
 // import { TabPanel } from "./components/TabPanel";
 // import { TabPanels } from "./components/TabPanels.ts";
-const check = ref(false)
 
-const switcher =() => {
-  check.value = !check.value
-}
-const enabled = ref(false)
+const observerRoot = ref();
+const targetBoxes = ref([]);
+
+onMounted(() => {
+  let options = {
+    root: document.getElementById("observerRoot"),
+    rootMargin: "0px",
+    threshold: 0.5,
+  };
+
+  let callback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) console.log("intersetion");
+    });
+  };
+
+  targetBoxes.value.forEach((box) => {
+    let observer = new IntersectionObserver(callback, options);
+    observer.observe(box);
+  });
+});
+
+const check = ref(false);
+
+const switcher = () => {
+  check.value = !check.value;
+};
+const enabled = ref(false);
 const categories = ref({
   Recent: [
     {

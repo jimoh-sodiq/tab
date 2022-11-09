@@ -14,8 +14,7 @@ export const Toggle = defineComponent({
   emits: ["update:modelValue"],
 
   setup(props, { slots, emit, expose }) {
-
-    const toggleComponentRef = ref()
+    const toggleComponentRef = ref();
 
     const handleClick = (event: MouseEvent) => {
       event.preventDefault();
@@ -23,15 +22,15 @@ export const Toggle = defineComponent({
     };
 
     const handleKeyEvents = (event: KeyboardEvent) => {
-    // prevent general keyboard events actions when focused
-    //   event.preventDefault();
-      let spaceKey  = " "  
+      // prevent general keyboard events actions when focused
+      //   event.preventDefault();
+      let spaceKey = " ";
       if (event.key === spaceKey) {
         event.preventDefault();
         emit("update:modelValue", !props.modelValue);
       }
 
-      return
+      return;
     };
 
     // expose({toggleComponentRef})
@@ -39,9 +38,9 @@ export const Toggle = defineComponent({
     return () =>
       h(
         "div",
-        { tabindex: 0, onClick: handleClick, onKeyup: handleKeyEvents },
+        { tabindex: 0, onKeyup: handleKeyEvents },
         [
-          h("Fragment", slots.default()),
+          h("Fragment", slots.default({ handleClick })),
           h("input", {
             hidden: true,
             type: "checkbox",
